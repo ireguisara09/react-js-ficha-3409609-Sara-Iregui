@@ -184,3 +184,35 @@ const resumenProductos = productos.map(producto => {
 });
 
 console.log(resumenProductos);
+
+// Reto 6: filter() y find()
+
+console.log("======= filter() y find() =======")
+
+const disponibles = productos.filter(producto => producto.stock > 0);
+const producto3 = productos.find(producto => producto.id === 3);
+
+const precioMayor = productos.filter(producto => producto.precio > 100000);
+console.log("========= Productos precio mayor a 1000000 =========")
+console.log(precioMayor);
+
+const precioEntre = productos.filter(producto => producto.precio >= 50000 && producto.precio <= 200000);
+console.log("========= Productos precio entre 50000 y 200000 =========")
+console.log(precioEntre);
+
+const categoria = productos.find(producto => producto.categoria === "Almacenamiento");
+console.log("========= Productos con categoria: Almacenamiento =========")
+console.log(categoria);
+
+const producto5 = productos.find(producto => producto.id === 5);  
+console.log("========= Productos con id 5 =========")
+console.log(producto5);
+
+console.log("======= Funcion buscarProducto =======")
+function buscarProducto(id) {
+    return productos.find(producto => producto.id === id);
+}
+
+const resultados = buscarProducto(7);
+
+console.log(resultados);
