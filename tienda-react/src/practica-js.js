@@ -1,3 +1,5 @@
+// Reto 1: Funciones, parametros, return
+
 // Multiplicación
 
 function calcularTotal(precio, cantidad) {
@@ -51,3 +53,91 @@ console.log(resultado5);
 // Diferencia entre console.log y return
 // console.log = Muestra el valor en pantalla
 // return = Devuelve un valor que se puede utilizar luego en otra parte del programa
+
+// Reto 2: Funciones flecha 
+
+console.log("======== FUNCIONES FLECHAS ========")
+
+// Tradicional
+/*function aplicarIva(precio) {
+return precio * 1.19;
+}*/
+
+// Flecha 
+
+/*const aplicarIva = (precio) => {
+return precio * 1.19;
+};*/
+
+
+// Flecha corta 
+
+/*const aplicarIva = precio => precio * 1.19;*/
+
+// Convertir cuadrado(numero) a arrow function.
+
+// Tradicional
+/*function cuadrado(numero) {
+    const cuadrado = numero * numero
+    return cuadrado;
+}
+const resultado6 = cuadrado(2)
+console.log("El resultado de la funcion tradicional es : ")
+console.log(resultado6);*/
+
+// Funcion flecha 
+
+const cuadrado = (numero) => {
+    return numero * numero;
+}
+
+const resultado6 = cuadrado(2)
+console.log("El resultado de la funcion flecha es: "+ resultado6); 
+
+// Convertir esMayorEdad(edad) a arrow function.
+
+// Tradicional
+/*function esMayorEdad(edad) {
+    const mayor = edad
+    if  (mayor  >= 18) {
+        console.log("Usted es mayor de edad")
+    }else{
+        console.log("Usted es menor de edad")
+    }
+}
+const resultado7 = esMayorEdad(13)
+console.log(resultado7);*/
+
+// Funcion flecha 
+
+const esMayorEdad = (edad) => {
+     const mayor = edad
+    if  (mayor  >= 18) {
+        console.log("Usted es mayor de edad")
+    }else{
+        console.log("Usted es menor de edad")
+    }
+}
+
+const resultado7 = esMayorEdad(19)
+console.log(resultado7);
+
+// Crear nombreCompleto(nombre, apellido) como arrow function.
+
+// Tradicional
+/*function nombreCompleto(nombre, apellido) {
+    const name = nombre + " " + apellido
+    return name; 
+}
+const resultado8 = nombreCompleto("Sara","Iregui")
+console.log("Nombre completo: "+resultado8);*/
+
+// Funcion flecha
+
+const nombreCompleto = (nombre, apellido) => {
+    const name = nombre + " " + apellido
+    return name; 
+}
+const resultado8 = nombreCompleto("Sara","Iregui")
+console.log("Nombre completo: "+resultado8);
+
