@@ -159,3 +159,11 @@ const productos = [
 ];
 
 console.log(productos);
+
+// Reto 4: forEach()
+
+console.log("======= forEach() =======");
+
+productos.forEach((producto, indice) => {
+console.log(`${indice + 1} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Stock: ${producto.stock}`);
+});
