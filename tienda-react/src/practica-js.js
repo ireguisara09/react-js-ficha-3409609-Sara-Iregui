@@ -245,3 +245,41 @@ console.log("¿Existe algún producto con precio mayor a $1.000.000?", precioMay
 console.log("¿Todos los productos tienen precio mayor que cero?", preciosValidos);
 console.log("¿Todos los productos tienen stock mayor o igual que cero?", stocksValidos);
 console.log("Valor total del inventario:", valorInventario);
+
+// Reto 8: JavaScript moderno
+
+console.log("======== JavaScript moderno ========");
+
+/*console.log(`El producto ${productos[0].nombre} cuesta $${productos[0].precio}`);
+
+const { nombre, precio, stock } = productos[0];
+console.log(nombre, precio, stock);
+
+const productoActualizado = {
+...productos[0],
+stock: 8
+};
+
+const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
+console.log(estado);*/
+
+// TAREA 
+
+// Crear una copia del primer producto cambiando precio y stock
+const productoActualizado = {
+    ...productos[0],
+    precio: 150000,
+    stock: 8
+};
+
+// Determinar si está disponible
+const estado = productoActualizado.stock > 0 ? "Disponible" : "Agotado";
+
+// Mostrar una frase usando template literal
+console.log(
+    `El producto ${productoActualizado.nombre} cuesta $${productoActualizado.precio} y tiene ${productoActualizado.stock} unidades. Estado: ${estado}.`
+);
+
+// Comprobar que el producto original no fue modificado
+console.log("Producto original:", productos[0]);
+console.log("Producto actualizado:", productoActualizado);
