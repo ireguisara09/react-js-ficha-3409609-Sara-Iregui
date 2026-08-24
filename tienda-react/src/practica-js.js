@@ -167,3 +167,20 @@ console.log("======= forEach() =======");
 productos.forEach((producto, indice) => {
 console.log(`${indice + 1} - Nombre: ${producto.nombre} - Precio: ${producto.precio} - Stock: ${producto.stock}`);
 });
+
+// Reto 5: map()
+
+console.log("======= map() =======");
+
+const nombres = productos.map(producto => producto.nombre);
+console.log(nombres);
+
+const preciosConIva = productos.map(producto => producto.precio * 1.19);
+console.log(preciosConIva);
+
+
+const resumenProductos = productos.map(producto => {
+    return `${producto.nombre} cuesta ${producto.precio}`;
+});
+
+console.log(resumenProductos);
