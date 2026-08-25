@@ -3,6 +3,7 @@ import { productos } from './data/productos';
 import './App.css'; 
 function App() { 
  const disponibles = productos.filter(producto => producto.stock > 0); 
+ const hayAgotados = productos.some(producto => producto.stock === 0);
  const valorInventario = productos.reduce( 
  (total, producto) => total + producto.precio * producto.stock, 
  0 
@@ -10,8 +11,9 @@ function App() {
  return ( 
  <main className="contenedor"> 
  <h1>Tienda tecnológica</h1> 
- <p>Productos disponibles: {disponibles.length}</p> 
- <p>Valor del inventario: ${valorInventario}</p> 
+ <p>Productos disponibles: {disponibles.length}</p>
+ <p>Productos agotados: {hayAgotados.toString()}</p> 
+ <p>Valor total del inventario: ${valorInventario}</p> 
  <section className="productos"> 
  {productos.map(producto => ( 
  <ProductoCard 
