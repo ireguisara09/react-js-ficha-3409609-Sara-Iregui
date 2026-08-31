@@ -1,12 +1,19 @@
+import { useState } from "react";
 import ProductoCard from './components/ProductoCard';
-import { productos } from './data/productos';
-import './App.css';
-import { useState } from "react";
-import { useState } from "react";
 import { productos as productosIniciales } from "./data/productos";
+import FormularioProducto from "./components/FormularioProducto";
+import './App.css';
 
 function App() {
 
+
+   // Estados
+  const [productos, setProductos] = useState(productosIniciales);
+  const [busqueda, setBusqueda] = useState("");
+  const [categoria, setCategoria] = useState("Todas");
+  const [soloDisponibles, setSoloDisponibles] = useState(false);
+  
+  
   // Productos disponibles
   const disponibles = productos.filter(
     producto => producto.stock > 0
@@ -23,12 +30,6 @@ function App() {
       total + producto.precio * producto.stock,
     0
   );
-
-  // Estados
-  const [busqueda, setBusqueda] = useState("");
-  const [categoria, setCategoria] = useState("Todas");
-  const [soloDisponibles, setSoloDisponibles] = useState(false);
-  const [productos, setProductos] = useState(productosIniciales);
 
   // Filtrar productos
   const productosFiltrados = productos.filter(producto => {
@@ -66,7 +67,7 @@ function App() {
 
   return (
     <main className="contenedor">
-
+      <FormularioProducto /> 
       <h1>Tienda tecnológica</h1>
 
       <p>
@@ -160,6 +161,7 @@ function App() {
       </section>
 
     </main>
+    
   );
 }
 
