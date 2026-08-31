@@ -14,3 +14,23 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the Oxlint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+
+
+
+// taller 3
+
+La aplicacion ahora puede hacer:
+
+Agregar productos
+Validar formularios
+Eliminar productos
+Modificar el stock de cada producto con [-] y [+]
+Calcular el inventario dinámicamente
+Gestionar el estado de la aplicación con useState
+
+
+Y un tablero dinamico que hace y registra:
+
+Productos registrados
+Productos agotados
+Valor total del inventario
