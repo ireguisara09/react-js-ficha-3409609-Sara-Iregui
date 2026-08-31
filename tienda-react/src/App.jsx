@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import ProductoCard from './components/ProductoCard';
 import { productos as productosIniciales } from "./data/productos";
@@ -6,24 +7,41 @@ import './App.css';
 
 function App() {
 
-
-   // Estados
+  // Estados
   const [productos, setProductos] = useState(productosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
-  
-  
+
   // Productos disponibles
   const disponibles = productos.filter(
     producto => producto.stock > 0
   );
+
   const eliminarProducto = (id) => {
-const nuevaLista = productos.filter(
-producto => producto.id !== id
-);
-setProductos(nuevaLista);
-};
+    const nuevaLista = productos.filter(
+      producto => producto.id !== id
+    );
+    setProductos(nuevaLista);
+  };
+
+  // Modificar stock
+  const modificarStock = (id, cambio) => {
+    const nuevosProductos = productos.map(producto => {
+      if (producto.id === id) {
+        return {
+          ...producto,
+          stock: Math.max(
+            0,
+            producto.stock + cambio
+          )
+        };
+      }
+      return producto;
+    });
+
+    setProductos(nuevosProductos);
+  };
 
   // Verifica si existe al menos un producto agotado
   const hayAgotados = productos.some(
@@ -72,16 +90,19 @@ setProductos(nuevaLista);
   );
 
   const agregarProducto = (nuevoProducto) => {
-setProductos([
-...productos,
-nuevoProducto
-]);
-};
+    setProductos([
+      ...productos,
+      nuevoProducto
+    ]);
+  };
 
   return (
     <main className="contenedor">
-      <FormularioProducto 
-      onAgregar={agregarProducto}/>
+
+      <FormularioProducto
+        onAgregar={agregarProducto}
+      />
+
       <h1>Tienda tecnológica</h1>
 
       <p>
@@ -165,18 +186,18 @@ nuevoProducto
       {/* Productos */}
       <section className="productos">
 
-{productosOrdenados.map((producto) => (
-  <ProductoCard
-    key={producto.id}
-    producto={producto}
-    onEliminar={eliminarProducto}
-  />
-))}
+        {productosOrdenados.map((producto) => (
+          <ProductoCard
+            key={producto.id}
+            producto={producto}
+            onEliminar={eliminarProducto}
+            modificarStock={modificarStock}
+          />
+        ))}
 
       </section>
 
     </main>
-    
   );
 }
 

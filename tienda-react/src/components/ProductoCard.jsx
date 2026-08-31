@@ -1,4 +1,4 @@
-function ProductoCard({ producto, onEliminar }) {
+function ProductoCard({ producto, onEliminar, modificarStock }) {
 
   const {
     nombre,
@@ -23,8 +23,8 @@ function ProductoCard({ producto, onEliminar }) {
   };
 
   const formatearPrecio = precio => {
-return precio.toLocaleString("es-CO");
-};
+    return precio.toLocaleString("es-CO");
+  };
 
   return (
     <article className="producto-card">
@@ -55,21 +55,34 @@ return precio.toLocaleString("es-CO");
 
       <br />
 
-<button 
-  onClick={mostrarProducto} 
-  disabled={stock === 0} 
->
-  {stock > 0 
-    ? "Ver producto" 
-    : "Agotado"}
-</button>
+      <button
+        onClick={mostrarProducto}
+        disabled={stock === 0}
+      >
+        {stock > 0
+          ? "Ver producto"
+          : "Agotado"}
+      </button>
 
-<button onClick={() => onEliminar(producto.id)}>
-  Eliminar
-</button>
+      <button onClick={() => onEliminar(producto.id)}>
+        Eliminar
+      </button>
+
+      <div>
+        <button onClick={() => modificarStock(producto.id, -1)}>
+          [-]
+        </button>
+
+        Stock: {stock}
+
+        <button onClick={() => modificarStock(producto.id, 1)}>
+          [+]
+        </button>
+      </div>
 
     </article>
   );
 }
 
 export default ProductoCard;
+
