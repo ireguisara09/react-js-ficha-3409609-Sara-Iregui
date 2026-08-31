@@ -43,8 +43,8 @@ function App() {
     setProductos(nuevosProductos);
   };
 
-  // Verifica si existe al menos un producto agotado
-  const hayAgotados = productos.some(
+  // Productos agotados
+  const productosAgotados = productos.filter(
     producto => producto.stock === 0
   );
 
@@ -105,21 +105,22 @@ function App() {
 
       <h1>Tienda tecnológica</h1>
 
-      <p>
-        Productos disponibles: {disponibles.length}
-      </p>
+      {/* Indicadores de inventario */}
+      <section>
 
-      <p>
-        Productos encontrados: {productosFiltrados.length}
-      </p>
+        <p>
+          Productos registrados: {productos.length}
+        </p>
 
-      <p>
-        Productos agotados: {hayAgotados.toString()}
-      </p>
+        <p>
+          Productos agotados: {productosAgotados.length}
+        </p>
 
-      <p>
-        Valor total del inventario: ${valorInventario}
-      </p>
+        <p>
+          Valor total del inventario: ${valorInventario}
+        </p>
+
+      </section>
 
       {/* Filtro por categoría */}
       <select
