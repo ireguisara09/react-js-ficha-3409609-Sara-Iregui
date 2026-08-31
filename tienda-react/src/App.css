@@ -6,8 +6,9 @@
 } 
 .productos { 
  display: grid; 
- grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+ grid-template-columns: repeat(2, minmax(220px, 1fr)); 
  gap: 16px; 
+ color: black;
 } 
 .producto-card { 
  border: 1px solid #ddd; 
@@ -15,3 +16,4 @@
  padding: 16px; 
  background: white; 
 } 
+
