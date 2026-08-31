@@ -18,6 +18,12 @@ function App() {
   const disponibles = productos.filter(
     producto => producto.stock > 0
   );
+  const eliminarProducto = (id) => {
+const nuevaLista = productos.filter(
+producto => producto.id !== id
+);
+setProductos(nuevaLista);
+};
 
   // Verifica si existe al menos un producto agotado
   const hayAgotados = productos.some(
@@ -159,12 +165,13 @@ nuevoProducto
       {/* Productos */}
       <section className="productos">
 
-        {productosOrdenados.map(producto => (
-          <ProductoCard
-            key={producto.id}
-            producto={producto}
-          />
-        ))}
+{productosOrdenados.map((producto) => (
+  <ProductoCard
+    key={producto.id}
+    producto={producto}
+    onEliminar={eliminarProducto}
+  />
+))}
 
       </section>
 

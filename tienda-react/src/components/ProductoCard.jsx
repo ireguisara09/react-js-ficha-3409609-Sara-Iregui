@@ -1,4 +1,4 @@
-function ProductoCard({ producto }) {
+function ProductoCard({ producto, onEliminar }) {
 
   const {
     nombre,
@@ -55,14 +55,18 @@ return precio.toLocaleString("es-CO");
 
       <br />
 
-      <button
-        onClick={mostrarProducto}
-        disabled={stock === 0}
-      >
-        {stock > 0
-          ? "Ver producto"
-          : "Agotado"}
-      </button>
+<button 
+  onClick={mostrarProducto} 
+  disabled={stock === 0} 
+>
+  {stock > 0 
+    ? "Ver producto" 
+    : "Agotado"}
+</button>
+
+<button onClick={() => onEliminar(producto.id)}>
+  Eliminar
+</button>
 
     </article>
   );
