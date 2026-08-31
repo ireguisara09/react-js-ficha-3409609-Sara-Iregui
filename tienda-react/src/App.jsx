@@ -202,3 +202,11 @@ function App() {
 }
 
 export default App;
+
+
+// PREGUNTA
+
+// ¿Por qué para eliminar usamos filter() y no find()? Escriban una respuesta de una sola frase en un comentario del código.
+
+
+// RTA = Usamos filter() porque necesitamos crear una nueva lista sin el producto eliminado, mientras que find() solo devuelve un elemento.
