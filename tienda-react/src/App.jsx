@@ -2,6 +2,8 @@ import ProductoCard from './components/ProductoCard';
 import { productos } from './data/productos';
 import './App.css';
 import { useState } from "react";
+import { useState } from "react";
+import { productos as productosIniciales } from "./data/productos";
 
 function App() {
 
@@ -26,6 +28,7 @@ function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
+  const [productos, setProductos] = useState(productosIniciales);
 
   // Filtrar productos
   const productosFiltrados = productos.filter(producto => {
