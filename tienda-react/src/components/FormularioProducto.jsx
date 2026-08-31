@@ -17,6 +17,15 @@ function FormularioProducto({ onAgregar }) {
 
   const manejarEnvio = (evento) => {
     evento.preventDefault();
+    if (
+formulario.nombre.trim() === "" ||
+formulario.categoria.trim() === "" ||
+Number(formulario.precio) <= 0 ||
+Number(formulario.stock) < 0
+) {
+alert("Revisa los datos del producto");
+return;
+}
 
     const nuevoProducto = {
       id: Date.now(),
