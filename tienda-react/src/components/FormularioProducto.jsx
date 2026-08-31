@@ -1,5 +1,5 @@
 import { useState } from "react";
-function FormularioProducto() {
+function FormularioProducto(onAgregar) {
 const [formulario, setFormulario] = useState({
 nombre: "",
 categoria: "",
@@ -11,9 +11,22 @@ setFormulario({
 ...formulario,
 [evento.target.name]: evento.target.value
 });
+
+const manejarEnvio = (evento) => { 
+ evento.preventDefault(); 
+ const nuevoProducto = { 
+ id: Date.now(), 
+ nombre: formulario.nombre, 
+ categoria: formulario.categoria, 
+ precio: Number(formulario.precio), 
+ stock: Number(formulario.stock) 
+ }; 
+ onAgregar(nuevoProducto);
+}; 
+
 };
 return (
-<form>
+<form onSubmit={manejarEnvio}> 
 <h2>Agregar producto</h2>
 <input
 type="text"

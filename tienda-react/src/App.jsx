@@ -65,9 +65,17 @@ function App() {
     (a, b) => b.precioConDescuento - a.precioConDescuento
   );
 
+  const agregarProducto = (nuevoProducto) => {
+setProductos([
+...productos,
+nuevoProducto
+]);
+};
+
   return (
     <main className="contenedor">
-      <FormularioProducto /> 
+      <FormularioProducto 
+      onAgregar={agregarProducto}/>
       <h1>Tienda tecnológica</h1>
 
       <p>
