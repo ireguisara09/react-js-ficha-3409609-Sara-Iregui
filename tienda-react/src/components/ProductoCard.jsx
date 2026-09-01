@@ -67,13 +67,13 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
 
       <div>
         <button onClick={() => modificarStock(producto.id, -1)}>
-          [-]
+          -
         </button>
 
         Stock: {stock}
 
         <button onClick={() => modificarStock(producto.id, 1)}>
-          [+]
+          +
         </button>
       </div>
 
