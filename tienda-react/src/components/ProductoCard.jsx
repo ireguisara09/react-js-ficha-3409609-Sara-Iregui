@@ -45,9 +45,6 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
         Precio con descuento: ${formatearPrecio(precioConDescuento)}
       </p>
 
-      <p>
-        Stock: {stock}
-      </p>
 
       <strong>
         {estado}
