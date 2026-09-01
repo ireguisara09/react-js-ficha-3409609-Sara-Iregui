@@ -131,6 +131,8 @@ function App() {
 
       {/* Formulario para agregar producto, debajo de los filtros */}
       <FormularioProducto onAgregar={agregarProducto} />
+      <br>
+      </br>
 
       {/* Productos */}
       <section className="productos">
