@@ -99,9 +99,7 @@ function App() {
   return (
     <main className="contenedor">
 
-      <FormularioProducto
-        onAgregar={agregarProducto}
-      />
+      
 
       <h1>Tienda tecnológica</h1>
 
@@ -180,6 +178,12 @@ function App() {
 
         Solo productos disponibles
       </label>
+
+      
+
+      <FormularioProducto
+        onAgregar={agregarProducto}
+      />
 
       <br />
       <br />
