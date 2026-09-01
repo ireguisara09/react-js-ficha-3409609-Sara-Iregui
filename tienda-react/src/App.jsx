@@ -74,6 +74,13 @@ function App() {
     setProductos([...productos, nuevoProducto]);
   };
 
+  // Limpiar filtros
+  const limpiarFiltros = () => {
+    setBusqueda("");
+    setCategoria("Todas");
+    setSoloDisponibles(false);
+  };
+
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
@@ -127,12 +134,17 @@ function App() {
           />
           Solo productos disponibles
         </label>
+
+        {/* Botón para limpiar los filtros */}
+        <button onClick={limpiarFiltros}>Limpiar filtros</button>
+
+        {/* Contador de productos encontrados */}
+        <p>Productos encontrados: {productosFiltrados.length}</p>
       </section>
 
       {/* Formulario para agregar producto, debajo de los filtros */}
       <FormularioProducto onAgregar={agregarProducto} />
-      <br>
-      </br>
+      <br></br>
 
       {/* Productos */}
       <section className="productos">
