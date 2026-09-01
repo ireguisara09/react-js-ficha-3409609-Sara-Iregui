@@ -3,7 +3,63 @@
   margin: 0 auto;
   padding: 24px;
   font-family: Arial, sans-serif;
+  color: var(--text-h);
 }
+
+/* ===== Indicadores ===== */
+
+.indicadores {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.indicadores p {
+  margin: 4px 0;
+  font-size: 18px;
+}
+
+/* ===== Filtros ===== */
+
+.filtros {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filtros input,
+.filtros select {
+  padding: 12px 16px;
+  font-size: 16px;
+  min-width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.filtros button {
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.filtros button:hover {
+  opacity: 0.85;
+}
+
+.checkbox-disponibles {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+}
+
+/* ===== Productos ===== */
 
 .productos {
   display: grid;
@@ -17,24 +73,25 @@
   border-radius: 10px;
   padding: 16px;
   background: white;
+  box-shadow: var(--shadow);
 }
 
-/* ===== Filtros ===== */
-
-.filtros {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-bottom: 25px;
+.producto-card h2 {
+  margin-bottom: 10px;
 }
 
-.filtros input,
-.filtros select {
-  padding: 12px 16px;
-  font-size: 16px;
-  min-width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.producto-card button {
+  padding: 8px 12px;
+  margin: 4px 4px 0 0;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.producto-card button:hover {
+  opacity: 0.85;
 }
 
 /* ===== Responsive ===== */
@@ -47,6 +104,10 @@
 
   .filtros input[type="text"] {
     min-width: 0;
+  }
+
+  .productos {
+    grid-template-columns: 1fr;
   }
 
   .campos-formulario {
