@@ -99,9 +99,7 @@ function App() {
   return (
     <main className="contenedor">
 
-      <FormularioProducto
-        onAgregar={agregarProducto}
-      />
+      
 
       <h1>Tienda tecnológica</h1>
 
@@ -123,6 +121,7 @@ function App() {
       </section>
 
       {/* Filtro por categoría */}
+      <div classname = "filtros">
       <select
         value={categoria}
         onChange={(evento) =>
@@ -157,6 +156,7 @@ function App() {
           Dispositivos
         </option>
       </select>
+      </div>
 
       {/* Buscar producto */}
       <input
@@ -180,6 +180,12 @@ function App() {
 
         Solo productos disponibles
       </label>
+
+      
+
+      <FormularioProducto
+        onAgregar={agregarProducto}
+      />
 
       <br />
       <br />
