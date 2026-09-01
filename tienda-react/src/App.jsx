@@ -128,7 +128,8 @@ function App() {
           Solo productos disponibles
         </label>
       </section>
-
+       <br>
+      </br>
       {/* Formulario para agregar producto, debajo de los filtros */}
       <FormularioProducto onAgregar={agregarProducto} />
       <br>
