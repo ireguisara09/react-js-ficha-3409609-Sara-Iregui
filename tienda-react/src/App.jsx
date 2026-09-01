@@ -76,12 +76,10 @@ function App() {
 
   return (
     <main className="contenedor">
-      <FormularioProducto onAgregar={agregarProducto} />
-
       <h1>Tienda tecnológica</h1>
 
       {/* Indicadores de inventario */}
-      <section>
+      <section className="indicadores">
         <p>Productos registrados: {productos.length}</p>
 
         <p>Productos agotados: {productosAgotados.length}</p>
@@ -89,48 +87,50 @@ function App() {
         <p>Valor total del inventario: ${valorInventario}</p>
       </section>
 
-      {/* Filtro por categoría */}
-      <select
-        value={categoria}
-        onChange={(evento) => setCategoria(evento.target.value)}
-      >
-        <option value="Todas">Todas</option>
+      {/* Filtros: categoría, búsqueda y disponibilidad */}
+      <section className="filtros">
+        <select
+          value={categoria}
+          onChange={(evento) => setCategoria(evento.target.value)}
+        >
+          <option value="Todas">Todas</option>
 
-        <option value="Perifericos">Periféricos</option>
+          <option value="Perifericos">Periféricos</option>
 
-        <option value="Pantallas">Pantallas</option>
+          <option value="Pantallas">Pantallas</option>
 
-        <option value="Audio">Audio</option>
+          <option value="Audio">Audio</option>
 
-        <option value="Computadores">Computadores</option>
+          <option value="Computadores">Computadores</option>
 
-        <option value="Almacenamiento">Almacenamiento</option>
+          <option value="Almacenamiento">Almacenamiento</option>
 
-        <option value="Dispositivos">Dispositivos</option>
-      </select>
+          <option value="Dispositivos">Dispositivos</option>
+        </select>
 
-      {/* Buscar producto */}
-      <input
-        type="text"
-        placeholder="Buscar producto..."
-        value={busqueda}
-        onChange={(evento) => {
-          setBusqueda(evento.target.value);
-        }}
-      />
-
-      {/* Mostrar solo productos disponibles */}
-      <label>
+        {/* Buscar producto */}
         <input
-          type="checkbox"
-          checked={soloDisponibles}
-          onChange={(evento) => setSoloDisponibles(evento.target.checked)}
+          type="text"
+          placeholder="Buscar producto..."
+          value={busqueda}
+          onChange={(evento) => {
+            setBusqueda(evento.target.value);
+          }}
         />
-        Solo productos disponibles
-      </label>
 
-      <br />
-      <br />
+        {/* Mostrar solo productos disponibles */}
+        <label className="checkbox-disponibles">
+          <input
+            type="checkbox"
+            checked={soloDisponibles}
+            onChange={(evento) => setSoloDisponibles(evento.target.checked)}
+          />
+          Solo productos disponibles
+        </label>
+      </section>
+
+      {/* Formulario para agregar producto, debajo de los filtros */}
+      <FormularioProducto onAgregar={agregarProducto} />
 
       {/* Productos */}
       <section className="productos">
