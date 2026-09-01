@@ -1,19 +1,162 @@
-.contenedor { 
- max-width: 1100px; 
- margin: 0 auto; 
- padding: 24px; 
- font-family: Arial, sans-serif; 
-} 
-.productos { 
- display: grid; 
- grid-template-columns: repeat(2, minmax(220px, 1fr)); 
- gap: 16px; 
- color: black;
-} 
-.producto-card { 
- border: 1px solid #ddd; 
- border-radius: 10px; 
- padding: 16px; 
- background: white; 
-} 
+/* ===== Variables de color y estilo base ===== */
+:root {
+  --color-fondo-oscuro: #1a1a1a;
+  --color-texto-claro: #ffffff;
+  --color-texto-secundario: #a9c6e8;
+  --color-boton: #4a5b7a;
+  --color-boton-hover: #5f7299;
+  --color-borde: #3a3a3a;
+}
 
+/* ===== Contenedor principal ===== */
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ===== Título principal ===== */
+.contenedor h1 {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-claro);
+  text-align: center;
+  padding: 24px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  font-size: 2rem;
+}
+
+/* ===== Indicadores de inventario ===== */
+.indicadores {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-secundario);
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+}
+
+.indicadores p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+/* ===== Sección de filtros ===== */
+/* Aquí se corrige el tamaño y la separación pedida en la observación 2 */
+.filtros {
+  background-color: var(--color-fondo-oscuro);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.filtros select,
+.filtros input[type="text"] {
+  height: 42px;
+  padding: 0 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-borde);
+  background-color: #2a2a2a;
+  color: var(--color-texto-claro);
+}
+
+.filtros input[type="text"] {
+  flex: 1;
+  min-width: 220px;
+}
+
+.checkbox-disponibles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-texto-claro);
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.checkbox-disponibles input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* ===== Formulario agregar producto ===== */
+/* Ahora ubicado debajo de los filtros, según observación 1 */
+.formulario-producto {
+  background-color: var(--color-fondo-oscuro);
+  color: var(--color-texto-claro);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.formulario-producto h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+}
+
+.campos-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.campos-formulario input {
+  flex: 1;
+  min-width: 150px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-borde);
+  background-color: #2a2a2a;
+  color: var(--color-texto-claro);
+  font-size: 0.95rem;
+}
+
+.formulario-producto button {
+  background-color: var(--color-boton);
+  color: var(--color-texto-claro);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.formulario-producto button:hover {
+  background-color: var(--color-boton-hover);
+}
+
+/* ===== Grilla de productos ===== */
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtros input[type="text"] {
+    min-width: 0;
+  }
+
+  .campos-formulario {
+    flex-direction: column;
+  }
+}
