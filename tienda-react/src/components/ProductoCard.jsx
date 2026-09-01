@@ -1,6 +1,7 @@
 function ProductoCard({ producto, onEliminar, modificarStock }) {
 
   const {
+    imagen,
     nombre,
     precio,
     categoria,
@@ -28,6 +29,11 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
 
   return (
     <article className="producto-card">
+
+      <img className= "producto-imagen"
+      src={imagen}
+      alt={nombre}
+      />
 
       <h2 style={{ color }}>
         {nombre}

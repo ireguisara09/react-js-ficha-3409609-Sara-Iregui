@@ -227,6 +227,14 @@
   opacity: 0.85;
 }
 
+/* ===== Imagen ======*/
+.producto-imagen {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
 /* ===== Responsive ===== */
 
 @media (max-width: 600px) {
