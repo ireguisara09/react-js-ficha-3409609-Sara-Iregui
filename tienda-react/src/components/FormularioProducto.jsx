@@ -47,9 +47,10 @@ return;
   };
 
   return (
-    <form onSubmit={manejarEnvio}>
-      <h2>Agregar producto</h2>
+  <form className="agregar-producto" onSubmit={manejarEnvio}>
+    <h2>Agregar producto</h2>
 
+    <div className="campos-formulario">
       <input
         type="text"
         name="nombre"
@@ -85,8 +86,9 @@ return;
       <button type="submit">
         Agregar producto
       </button>
-    </form>
-  );
+    </div>
+  </form>
+);
 }
 
 export default FormularioProducto;
