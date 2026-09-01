@@ -121,6 +121,7 @@ function App() {
       </section>
 
       {/* Filtro por categoría */}
+      <div classname = "filtros">
       <select
         value={categoria}
         onChange={(evento) =>
@@ -155,6 +156,7 @@ function App() {
           Dispositivos
         </option>
       </select>
+      </div>
 
       {/* Buscar producto */}
       <input
