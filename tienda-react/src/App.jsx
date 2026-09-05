@@ -16,9 +16,7 @@ function App() {
     return productosIniciales;
   };
 
-
   const [productos, setProductos] = useState(obtenerProductosIniciales);
-
 
   useEffect(() => {
     localStorage.setItem(
@@ -29,9 +27,8 @@ function App() {
 
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
-  const [soloDisponibles, setSoloDisponibles] = useState(false);
-
-  // null significa que en este momento no hay ningún producto en modo edición
+  const [filtroEstado, setFiltroEstado] = useState("Todos");
+  const [orden, setOrden] = useState("nombre-asc");
   const [productoEditando, setProductoEditando] = useState(null);
 
   const disponibles = productos.filter((producto) => producto.stock > 0);
@@ -40,7 +37,6 @@ function App() {
     const nuevaLista = productos.filter((producto) => producto.id !== id);
     setProductos(nuevaLista);
   };
-
 
   const modificarStock = (id, cambio) => {
     const nuevosProductos = productos.map((producto) => {
@@ -56,12 +52,10 @@ function App() {
     setProductos(nuevosProductos);
   };
 
-  // Guarda el producto seleccionado en el estado, activando el modo edición
   const editarProducto = (producto) => {
     setProductoEditando(producto);
   };
 
-  // Reemplaza el producto editado dentro del arreglo y sale del modo edición
   const actualizarProducto = (actualizado) => {
     const nuevaLista = productos.map((producto) =>
       producto.id === actualizado.id
@@ -73,11 +67,9 @@ function App() {
     setProductoEditando(null);
   };
 
-
   const productosAgotados = productos.filter(
     (producto) => producto.stock === 0,
   );
-
 
   const valorInventario = productos.reduce(
     (total, producto) => total + producto.precio * producto.stock,
@@ -92,37 +84,50 @@ function App() {
     const coincideCategoria =
       categoria === "Todas" || producto.categoria === categoria;
 
-    const coincideStock = !soloDisponibles || producto.stock > 0;
+    const coincideEstado =
+      filtroEstado === "Todos" ||
+      (filtroEstado === "Disponibles" && producto.stock > 0) ||
+      (filtroEstado === "Agotados" && producto.stock === 0);
 
-    return coincideNombre && coincideCategoria && coincideStock;
+    return coincideNombre && coincideCategoria && coincideEstado;
   });
-
 
   const productosConDescuento = productosFiltrados.map((producto) => ({
     ...producto,
     precioConDescuento: producto.precio * 0.9,
   }));
 
-
-  const productosOrdenados = [...productosConDescuento].sort(
-    (a, b) => b.precioConDescuento - a.precioConDescuento,
-  );
+  const productosOrdenados = [...productosConDescuento].sort((a, b) => {
+    switch (orden) {
+      case "nombre-asc":
+        return a.nombre.localeCompare(b.nombre);
+      case "precio-asc":
+        return a.precio - b.precio;
+      case "precio-desc":
+        return b.precio - a.precio;
+      case "stock-asc":
+        return a.stock - b.stock;
+      case "stock-desc":
+        return b.stock - a.stock;
+      default:
+        return 0;
+    }
+  });
 
   const agregarProducto = (nuevoProducto) => {
     setProductos([...productos, nuevoProducto]);
   };
 
-
   const limpiarFiltros = () => {
     setBusqueda("");
     setCategoria("Todas");
-    setSoloDisponibles(false);
+    setFiltroEstado("Todos");
+    setOrden("nombre-asc");
   };
 
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
-
 
       <section className="indicadores">
         <p>Productos registrados: {productos.length}</p>
@@ -131,7 +136,6 @@ function App() {
 
         <p>Valor total del inventario: ${valorInventario}</p>
       </section>
-
 
       <section className="filtros">
         <select
@@ -153,7 +157,6 @@ function App() {
           <option value="Dispositivos">Dispositivos</option>
         </select>
 
-
         <input
           type="text"
           placeholder="Buscar producto..."
@@ -163,24 +166,31 @@ function App() {
           }}
         />
 
+        <select
+          value={filtroEstado}
+          onChange={(evento) => setFiltroEstado(evento.target.value)}
+        >
+          <option value="Todos">Todos</option>
+          <option value="Disponibles">Disponibles</option>
+          <option value="Agotados">Agotados</option>
+        </select>
 
-        <label className="checkbox-disponibles">
-          <input
-            type="checkbox"
-            checked={soloDisponibles}
-            onChange={(evento) => setSoloDisponibles(evento.target.checked)}
-          />
-          Solo productos disponibles
-        </label>
-
+        <select
+          value={orden}
+          onChange={(evento) => setOrden(evento.target.value)}
+        >
+          <option value="nombre-asc">Nombre A-Z</option>
+          <option value="precio-asc">Precio menor a mayor</option>
+          <option value="precio-desc">Precio mayor a menor</option>
+          <option value="stock-asc">Stock menor a mayor</option>
+          <option value="stock-desc">Stock mayor a menor</option>
+        </select>
 
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
-
 
         <p>Productos encontrados: {productosFiltrados.length}</p>
       </section>
       <br></br>
-
 
       <FormularioProducto
         onAgregar={agregarProducto}
@@ -188,7 +198,6 @@ function App() {
         productoEditando={productoEditando}
       />
       <br></br>
-
 
       <section className="productos">
         {productosOrdenados.map((producto) => (
