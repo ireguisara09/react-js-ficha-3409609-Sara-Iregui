@@ -1,4 +1,4 @@
-function ProductoCard({ producto, onEliminar, modificarStock }) {
+function ProductoCard({ producto, onEliminar, modificarStock, onEditar }) {
 
   const {
     imagen,
@@ -30,9 +30,9 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
   return (
     <article className="producto-card">
 
-      <img className= "producto-imagen"
-      src={imagen}
-      alt={nombre}
+      <img className="producto-imagen"
+        src={imagen}
+        alt={nombre}
       />
 
       <h2 style={{ color }}>
@@ -71,6 +71,11 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
         Eliminar
       </button>
 
+      {/* Botón que activa el modo edición: envía el producto completo a App.jsx */}
+      <button onClick={() => onEditar(producto)}>
+        Editar
+      </button>
+
       <div>
         <button onClick={() => modificarStock(producto.id, -1)}>
           -
@@ -88,4 +93,3 @@ function ProductoCard({ producto, onEliminar, modificarStock }) {
 }
 
 export default ProductoCard;
-
