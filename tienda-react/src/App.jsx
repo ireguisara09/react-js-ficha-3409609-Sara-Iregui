@@ -5,29 +5,25 @@ import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
 
 function App() {
-  // Esta función decide con qué inventario arranca la app:
-  // si ya existe algo guardado en localStorage, lo usa;
-  // si no existe (primera vez que se abre la app), usa los productos iniciales por defecto.
+
   const obtenerProductosIniciales = () => {
     const guardados = localStorage.getItem("inventario");
 
     if (guardados) {
-      return JSON.parse(guardados); // convierte el texto guardado de vuelta a un arreglo utilizable
+      return JSON.parse(guardados);
     }
 
     return productosIniciales;
   };
 
-  // Se le pasa la función (sin ejecutarla con paréntesis) para que useState
-  // solo la llame UNA vez, en el primer render, y no en cada render.
+
   const [productos, setProductos] = useState(obtenerProductosIniciales);
 
-  // Cada vez que "productos" cambie (agregar, editar, eliminar, modificar stock),
-  // este efecto se ejecuta y guarda el inventario actualizado en el navegador.
+
   useEffect(() => {
     localStorage.setItem(
       "inventario",
-      JSON.stringify(productos) // se convierte el arreglo a texto porque localStorage solo guarda strings
+      JSON.stringify(productos)
     );
   }, [productos]);
 
@@ -35,7 +31,9 @@ function App() {
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
 
-  // Productos disponibles
+  // null significa que en este momento no hay ningún producto en modo edición
+  const [productoEditando, setProductoEditando] = useState(null);
+
   const disponibles = productos.filter((producto) => producto.stock > 0);
 
   const eliminarProducto = (id) => {
@@ -43,7 +41,7 @@ function App() {
     setProductos(nuevaLista);
   };
 
-  // Modificar stock
+
   const modificarStock = (id, cambio) => {
     const nuevosProductos = productos.map((producto) => {
       if (producto.id === id) {
@@ -58,18 +56,34 @@ function App() {
     setProductos(nuevosProductos);
   };
 
-  // Productos agotados
+  // Guarda el producto seleccionado en el estado, activando el modo edición
+  const editarProducto = (producto) => {
+    setProductoEditando(producto);
+  };
+
+  // Reemplaza el producto editado dentro del arreglo y sale del modo edición
+  const actualizarProducto = (actualizado) => {
+    const nuevaLista = productos.map((producto) =>
+      producto.id === actualizado.id
+        ? actualizado
+        : producto
+    );
+
+    setProductos(nuevaLista);
+    setProductoEditando(null);
+  };
+
+
   const productosAgotados = productos.filter(
     (producto) => producto.stock === 0,
   );
 
-  // Valor total del inventario
+
   const valorInventario = productos.reduce(
     (total, producto) => total + producto.precio * producto.stock,
     0,
   );
 
-  // Filtrar productos
   const productosFiltrados = productos.filter((producto) => {
     const coincideNombre = producto.nombre
       .toLowerCase()
@@ -83,15 +97,13 @@ function App() {
     return coincideNombre && coincideCategoria && coincideStock;
   });
 
-  // Agregar descuento del 10% utilizando map()
+
   const productosConDescuento = productosFiltrados.map((producto) => ({
     ...producto,
     precioConDescuento: producto.precio * 0.9,
   }));
 
-  // Ordenar de mayor precio a menor precio
-  // El spread [...productosConDescuento] crea una copia antes de ordenar,
-  // para no modificar directamente el arreglo original (buena práctica).
+
   const productosOrdenados = [...productosConDescuento].sort(
     (a, b) => b.precioConDescuento - a.precioConDescuento,
   );
@@ -100,7 +112,7 @@ function App() {
     setProductos([...productos, nuevoProducto]);
   };
 
-  // Limpiar filtros
+
   const limpiarFiltros = () => {
     setBusqueda("");
     setCategoria("Todas");
@@ -111,7 +123,7 @@ function App() {
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
 
-      {/* Indicadores de inventario */}
+
       <section className="indicadores">
         <p>Productos registrados: {productos.length}</p>
 
@@ -120,7 +132,7 @@ function App() {
         <p>Valor total del inventario: ${valorInventario}</p>
       </section>
 
-      {/* Filtros: categoría, búsqueda y disponibilidad */}
+
       <section className="filtros">
         <select
           value={categoria}
@@ -141,7 +153,7 @@ function App() {
           <option value="Dispositivos">Dispositivos</option>
         </select>
 
-        {/* Buscar producto */}
+
         <input
           type="text"
           placeholder="Buscar producto..."
@@ -151,7 +163,7 @@ function App() {
           }}
         />
 
-        {/* Mostrar solo productos disponibles */}
+
         <label className="checkbox-disponibles">
           <input
             type="checkbox"
@@ -161,19 +173,23 @@ function App() {
           Solo productos disponibles
         </label>
 
-        {/* Botón para limpiar los filtros */}
+
         <button onClick={limpiarFiltros}>Limpiar filtros</button>
 
-        {/* Contador de productos encontrados */}
+
         <p>Productos encontrados: {productosFiltrados.length}</p>
       </section>
       <br></br>
 
-      {/* Formulario para agregar producto, debajo de los filtros */}
-      <FormularioProducto onAgregar={agregarProducto} />
+
+      <FormularioProducto
+        onAgregar={agregarProducto}
+        onActualizar={actualizarProducto}
+        productoEditando={productoEditando}
+      />
       <br></br>
 
-      {/* Productos */}
+
       <section className="productos">
         {productosOrdenados.map((producto) => (
           <ProductoCard
@@ -181,6 +197,7 @@ function App() {
             producto={producto}
             onEliminar={eliminarProducto}
             modificarStock={modificarStock}
+            onEditar={editarProducto}
           />
         ))}
       </section>
@@ -189,9 +206,3 @@ function App() {
 }
 
 export default App;
-
-// PREGUNTA
-
-// ¿Por qué para eliminar usamos filter() y no find()? Escriban una respuesta de una sola frase en un comentario del código.
-
-// RTA = Usamos filter() porque necesitamos crear una nueva lista sin el producto eliminado, mientras que find() solo devuelve un elemento.
