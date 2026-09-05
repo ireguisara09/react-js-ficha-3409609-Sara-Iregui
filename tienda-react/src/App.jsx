@@ -1,12 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductoCard from "./components/ProductoCard";
 import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
 
 function App() {
-  // Estados
-  const [productos, setProductos] = useState(productosIniciales);
+  // Esta función decide con qué inventario arranca la app:
+  // si ya existe algo guardado en localStorage, lo usa;
+  // si no existe (primera vez que se abre la app), usa los productos iniciales por defecto.
+  const obtenerProductosIniciales = () => {
+    const guardados = localStorage.getItem("inventario");
+
+    if (guardados) {
+      return JSON.parse(guardados); // convierte el texto guardado de vuelta a un arreglo utilizable
+    }
+
+    return productosIniciales;
+  };
+
+  // Se le pasa la función (sin ejecutarla con paréntesis) para que useState
+  // solo la llame UNA vez, en el primer render, y no en cada render.
+  const [productos, setProductos] = useState(obtenerProductosIniciales);
+
+  // Cada vez que "productos" cambie (agregar, editar, eliminar, modificar stock),
+  // este efecto se ejecuta y guarda el inventario actualizado en el navegador.
+  useEffect(() => {
+    localStorage.setItem(
+      "inventario",
+      JSON.stringify(productos) // se convierte el arreglo a texto porque localStorage solo guarda strings
+    );
+  }, [productos]);
+
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [soloDisponibles, setSoloDisponibles] = useState(false);
@@ -66,6 +90,8 @@ function App() {
   }));
 
   // Ordenar de mayor precio a menor precio
+  // El spread [...productosConDescuento] crea una copia antes de ordenar,
+  // para no modificar directamente el arreglo original (buena práctica).
   const productosOrdenados = [...productosConDescuento].sort(
     (a, b) => b.precioConDescuento - a.precioConDescuento,
   );
@@ -141,8 +167,8 @@ function App() {
         {/* Contador de productos encontrados */}
         <p>Productos encontrados: {productosFiltrados.length}</p>
       </section>
-       <br>
-      </br>
+      <br></br>
+
       {/* Formulario para agregar producto, debajo de los filtros */}
       <FormularioProducto onAgregar={agregarProducto} />
       <br></br>
