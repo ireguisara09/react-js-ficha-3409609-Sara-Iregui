@@ -1,4 +1,4 @@
-function ProductoCard({ producto, onEliminar, modificarStock, onEditar }) {
+function ProductoCard({ producto, onEliminar, modificarStock, onEditar, mostrarMensaje }) {
 
   const {
     imagen,
@@ -19,10 +19,9 @@ function ProductoCard({ producto, onEliminar, modificarStock, onEditar }) {
       ? "blue"
       : "red";
 
-  const mostrarProducto = () => {
-    alert(`Seleccionaste ${nombre}`);
-  };
-
+const mostrarProducto = () => {
+  mostrarMensaje(`Seleccionaste ${nombre}`);
+};
   const formatearPrecio = precio => {
     return precio.toLocaleString("es-CO");
   };
@@ -76,17 +75,21 @@ function ProductoCard({ producto, onEliminar, modificarStock, onEditar }) {
         Editar
       </button>
 
-      <div>
-        <button onClick={() => modificarStock(producto.id, -1)}>
-          -
-        </button>
+<div>
+  <button onClick={() => modificarStock(producto.id, -1)}>
+    -
+  </button>
 
-        Stock: {stock}
+  Stock: {stock}
 
-        <button onClick={() => modificarStock(producto.id, 1)}>
-          +
-        </button>
-      </div>
+  <button onClick={() => modificarStock(producto.id, 1)}>
+    +
+  </button>
+
+  {stock > 0 && stock <= 2 && (
+    <span className="stock-bajo"> ⚠️ Stock bajo</span>
+  )}
+</div>
 
     </article>
   );
