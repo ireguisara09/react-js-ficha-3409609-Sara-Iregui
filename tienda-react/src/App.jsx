@@ -87,6 +87,14 @@ const actualizarProducto = (actualizado) => {
     0,
   );
 
+  const precioPromedio = productos.length > 0
+  ? (productos.reduce((suma, p) => suma + p.precio, 0) / productos.length).toFixed(2)
+  : 0;
+
+  const productoMasCaro = productos.length > 0
+  ? productos.reduce((max, p) => (p.precio > max.precio ? p : max), productos[0])
+  : null;
+
   const productosFiltrados = productos.filter((producto) => {
     const coincideNombre = producto.nombre
       .toLowerCase()
@@ -153,6 +161,21 @@ const agregarProducto = (nuevoProducto) => {
         <p>Productos agotados: {productosAgotados.length}</p>
 
         <p>Valor total del inventario: ${valorInventario}</p>
+
+        <section className="indicadores">
+        <p>Productos registrados: {productos.length}</p>
+
+       <p>Productos agotados: {productosAgotados.length}</p>
+
+      <p>Valor total del inventario: ${valorInventario}</p>
+
+       <p>Precio promedio: ${precioPromedio}</p>
+
+  {productoMasCaro && (
+    <p>Producto más costoso: {productoMasCaro.nombre} (${productoMasCaro.precio})</p>
+  )}
+</section>
+
       </section>
 
       <section className="filtros">
@@ -219,13 +242,14 @@ const agregarProducto = (nuevoProducto) => {
 
       <section className="productos">
         {productosOrdenados.map((producto) => (
-          <ProductoCard
-            key={producto.id}
-            producto={producto}
-            onEliminar={eliminarProducto}
-            modificarStock={modificarStock}
-            onEditar={editarProducto}
-          />
+<ProductoCard
+  key={producto.id}
+  producto={producto}
+  onEliminar={eliminarProducto}
+  modificarStock={modificarStock}
+  onEditar={editarProducto}
+  mostrarMensaje={mostrarMensaje}
+/>
         ))}
       </section>
     </main>
