@@ -18,12 +18,19 @@ function App() {
 
   const [productos, setProductos] = useState(obtenerProductosIniciales);
 
+  const [mensaje, setMensaje] = useState("");
+
   useEffect(() => {
     localStorage.setItem(
       "inventario",
       JSON.stringify(productos)
     );
   }, [productos]);
+
+  const mostrarMensaje = (texto) => {
+  setMensaje(texto);
+  setTimeout(() => setMensaje(""), 3000);
+};
 
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
@@ -33,10 +40,13 @@ function App() {
 
   const disponibles = productos.filter((producto) => producto.stock > 0);
 
-  const eliminarProducto = (id) => {
-    const nuevaLista = productos.filter((producto) => producto.id !== id);
-    setProductos(nuevaLista);
-  };
+const eliminarProducto = (id) => {
+  if (!window.confirm("¿Seguro que quieres eliminar este producto?")) return;
+
+  const nuevaLista = productos.filter((producto) => producto.id !== id);
+  setProductos(nuevaLista);
+  mostrarMensaje("Producto eliminado.");
+};
 
   const modificarStock = (id, cambio) => {
     const nuevosProductos = productos.map((producto) => {
@@ -56,16 +66,17 @@ function App() {
     setProductoEditando(producto);
   };
 
-  const actualizarProducto = (actualizado) => {
-    const nuevaLista = productos.map((producto) =>
-      producto.id === actualizado.id
-        ? actualizado
-        : producto
-    );
+const actualizarProducto = (actualizado) => {
+  const nuevaLista = productos.map((producto) =>
+    producto.id === actualizado.id
+      ? actualizado
+      : producto
+  );
 
-    setProductos(nuevaLista);
-    setProductoEditando(null);
-  };
+  setProductos(nuevaLista);
+  setProductoEditando(null);
+  mostrarMensaje("Producto actualizado correctamente.");
+};
 
   const productosAgotados = productos.filter(
     (producto) => producto.stock === 0,
@@ -114,9 +125,10 @@ function App() {
     }
   });
 
-  const agregarProducto = (nuevoProducto) => {
-    setProductos([...productos, nuevoProducto]);
-  };
+const agregarProducto = (nuevoProducto) => {
+  setProductos([...productos, nuevoProducto]);
+  mostrarMensaje("Producto agregado correctamente.");
+};
 
   const limpiarFiltros = () => {
     setBusqueda("");
