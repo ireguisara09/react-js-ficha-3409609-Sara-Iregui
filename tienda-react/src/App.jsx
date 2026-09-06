@@ -102,6 +102,11 @@ const actualizarProducto = (actualizado) => {
 
     return coincideNombre && coincideCategoria && coincideEstado;
   });
+  useEffect(() => {
+  if (busqueda && productosFiltrados.length === 0) {
+    setMensaje("No se encontraron productos.");
+  }
+}, [busqueda, productosFiltrados.length]);
 
   const productosConDescuento = productosFiltrados.map((producto) => ({
     ...producto,
@@ -140,6 +145,7 @@ const agregarProducto = (nuevoProducto) => {
   return (
     <main className="contenedor">
       <h1>Tienda tecnológica</h1>
+      {mensaje && <p className="mensaje-estado">{mensaje}</p>}
 
       <section className="indicadores">
         <p>Productos registrados: {productos.length}</p>
