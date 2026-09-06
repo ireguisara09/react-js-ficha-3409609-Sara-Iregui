@@ -241,6 +241,13 @@
   opacity: 0.85;
 }
 
+.producto-card .stock-bajo {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 13px;
+  margin-left: 6px;
+}
+
 /* ===== Imagen ======*/
 .producto-imagen {
   width: 200px;
