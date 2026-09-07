@@ -1,5 +1,5 @@
 // components/ProductoCard.jsx
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 function ProductoCard({
   producto,

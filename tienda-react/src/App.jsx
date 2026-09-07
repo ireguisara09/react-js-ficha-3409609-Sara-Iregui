@@ -1,6 +1,7 @@
 // App.jsx
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
+
 
 import Inicio from "./pages/Inicio";
 import Inventario from "./pages/Inventario";

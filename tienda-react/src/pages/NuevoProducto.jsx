@@ -1,5 +1,5 @@
 // pages/NuevoProducto.jsx
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import FormularioProducto from "../components/FormularioProducto";
 
 function NuevoProducto({ agregarProducto }) {
