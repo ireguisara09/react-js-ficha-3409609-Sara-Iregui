@@ -1,4 +1,4 @@
-// components/ProductoCard.jsx
+
 import { NavLink } from "react-router-dom";
 
 function ProductoCard({
@@ -17,9 +17,9 @@ function ProductoCard({
     precioConDescuento
   } = producto;
 
-  const estado = stock > 0 ? "Disponible" : "Agotado";
+  const disponible = stock > 0;
 
-  const color = stock > 0 ? "blue" : "red";
+  const estado = disponible ? "Disponible" : "Agotado";
 
   const mostrarProducto = () => {
     mostrarMensaje(`Seleccionaste ${nombre}`);
@@ -32,75 +32,111 @@ function ProductoCard({
   return (
     <article className="producto-card">
 
-      <img
-        className="producto-imagen"
-        src={imagen}
-        alt={nombre}
-      />
+      {/* Imagen */}
+      <div className="producto-imagen-contenedor">
+        <img
+          className="producto-imagen"
+          src={imagen}
+          alt={nombre}
+        />
+      </div>
 
-      <h2 style={{ color }}>
+      {/* Categoría */}
+      <span className="categoria">
+        {categoria}
+      </span>
+
+      {/* Nombre */}
+      <h2 className={disponible ? "producto-disponible" : "producto-agotado"}>
         {nombre}
       </h2>
 
-      <p>
-        Categoría: {categoria}
+      {/* Precios */}
+      <div className="precios">
+
+        <p className="precio-original">
+          ${formatearPrecio(precio)}
+        </p>
+
+        <p className="precio-descuento">
+          ${formatearPrecio(precioConDescuento)}
+        </p>
+
+      </div>
+
+      {/* Estado */}
+      <p className={disponible ? "disponible" : "agotado"}>
+        ● {estado}
       </p>
 
-      <p>
-        Precio: ${formatearPrecio(precio)}
-      </p>
+      {/* Stock */}
+      <div className="control-stock">
 
-      <p>
-        Precio con descuento: $
-        {formatearPrecio(precioConDescuento)}
-      </p>
-
-      <strong>
-        {estado}
-      </strong>
-
-      <br />
-
-      <button
-        onClick={mostrarProducto}
-        disabled={stock === 0}
-      >
-        {stock > 0 ? "Ver producto" : "Agotado"}
-      </button>
-
-      <NavLink to={`/productos/${producto.id}`}>
-        Ver detalle
-      </NavLink>
-
-      <button onClick={() => onEliminar(producto.id)}>
-        Eliminar
-      </button>
-
-      {/* Botón para editar el producto */}
-      <button onClick={() => onEditar(producto)}>
-        Editar
-      </button>
-
-      <div>
         <button
+          className="boton-stock"
           onClick={() => modificarStock(producto.id, -1)}
+          disabled={stock === 0}
         >
-          -
+          −
         </button>
 
-        Stock: {stock}
+        <span>
+          Stock: <strong>{stock}</strong>
+        </span>
 
         <button
+          className="boton-stock"
           onClick={() => modificarStock(producto.id, 1)}
         >
           +
         </button>
 
-        {stock > 0 && stock <= 2 && (
-          <span className="stock-bajo">
-            ⚠️ Stock bajo
-          </span>
-        )}
+      </div>
+
+      {/* Alerta de stock bajo */}
+      {stock > 0 && stock <= 2 && (
+        <span className="stock-bajo">
+          ⚠️ Stock bajo
+        </span>
+      )}
+
+      {/* Acciones principales */}
+      <div className="acciones-principales">
+
+        <button
+          className="boton-ver"
+          onClick={mostrarProducto}
+          disabled={!disponible}
+        >
+          {disponible ? "Ver producto" : "Agotado"}
+        </button>
+
+        <NavLink
+          className="boton-detalle"
+          to={`/productos/${producto.id}`}
+        >
+          Ver detalle
+        </NavLink>
+
+      </div>
+
+      {/* Acciones administrativas */}
+      <div className="acciones-secundarias">
+
+        <button
+          className="boton-editar"
+          onClick={() => onEditar(producto)}
+        >
+          Editar
+        </button>
+
+        <button
+          className="boton-eliminar"
+          onClick={() => onEliminar(producto.id)}
+        >
+          Eliminar
+        </button>
+
       </div>
 
     </article>

@@ -1,7 +1,5 @@
-// App.jsx
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
 
 import Inicio from "./pages/Inicio";
 import Inventario from "./pages/Inventario";
@@ -36,6 +34,7 @@ function App() {
 
   const mostrarMensaje = (texto) => {
     setMensaje(texto);
+
     setTimeout(() => {
       setMensaje("");
     }, 3000);
@@ -60,7 +59,10 @@ function App() {
       return;
     }
 
-    const nuevaLista = productos.filter((producto) => producto.id !== id);
+    const nuevaLista = productos.filter(
+      (producto) => producto.id !== id
+    );
+
     setProductos(nuevaLista);
     mostrarMensaje("Producto eliminado.");
   };
@@ -73,6 +75,7 @@ function App() {
           stock: Math.max(0, producto.stock + cambio)
         };
       }
+
       return producto;
     });
 
@@ -80,13 +83,22 @@ function App() {
   };
 
   return (
+  <>
+    <Navbar />
+
+    {mensaje && (
+      <div className="mensaje-exito">
+        {mensaje}
+      </div>
+    )}
+
     <main className="contenedor">
-      <Navbar />
-
-      {mensaje && <p className="mensaje-estado">{mensaje}</p>}
-
       <Routes>
-        <Route path="/" element={<Inicio />} />
+
+        <Route
+          path="/"
+          element={<Inicio />}
+        />
 
         <Route
           path="/inventario"
@@ -95,27 +107,36 @@ function App() {
               productos={productos}
               eliminarProducto={eliminarProducto}
               modificarStock={modificarStock}
-              actualizarProducto={actualizarProducto}
-              mostrarMensaje={mostrarMensaje}
             />
           }
         />
 
         <Route
           path="/nuevo"
-          element={<NuevoProducto agregarProducto={agregarProducto} />}
+          element={
+            <NuevoProducto
+              agregarProducto={agregarProducto}
+            />
+          }
         />
-
-        <Route
+         <Route
           path="/productos/:id"
           element={<DetalleProducto productos={productos} />}
         />
+        <Route
+          path="/acerca"
+          element={<Acerca />}
+        />
 
-        <Route path="/acerca" element={<Acerca />} />
-        <Route path="*" element={<NoEncontrado />} />
+        <Route
+          path="*"
+          element={<NoEncontrado />}
+        />
+
       </Routes>
     </main>
-  );
+  </>
+);
 }
 
 export default App;
