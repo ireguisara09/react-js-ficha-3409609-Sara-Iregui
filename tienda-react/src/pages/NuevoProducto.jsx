@@ -1,5 +1,10 @@
 function NuevoProducto() {
-  return <h1>Nuevo Producto</h1>;
+  return (
+    <section>
+      <h1>Nuevo producto</h1>
+      <p>Aquí podrás agregar un nuevo producto.</p>
+    </section>
+  );
 }
 
 export default NuevoProducto;

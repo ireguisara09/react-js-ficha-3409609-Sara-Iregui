@@ -1,5 +1,12 @@
 function Acerca() {
-  return <h1>Acerca de</h1>;
+  return (
+    <section>
+      <h1>Acerca</h1>
+      <p>
+        Esta es una tienda tecnológica desarrollada con React.
+      </p>
+    </section>
+  );
 }
 
 export default Acerca;
