@@ -5,6 +5,7 @@ import FormularioProducto from "../components/FormularioProducto";
 
 import { productos as productosIniciales } from "../data/productos";
 
+
 function Inventario() {
 
   const obtenerProductosIniciales = () => {

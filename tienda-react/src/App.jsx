@@ -7,8 +7,8 @@ import Acerca from "./pages/Acerca";
 import NoEncontrado from "./pages/NoEncontrado";
 
 import Navbar from "./components/Navbar";
-
-import "./App.css";
+import "../src/index.css";
+import "../src/App.css";
 
 function App() {
   return (
