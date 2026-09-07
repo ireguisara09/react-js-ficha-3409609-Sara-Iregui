@@ -1,3 +1,6 @@
+// components/ProductoCard.jsx
+import { NavLink } from "react-router";
+
 function ProductoCard({
   producto,
   onEliminar,
@@ -65,6 +68,10 @@ function ProductoCard({
         {stock > 0 ? "Ver producto" : "Agotado"}
       </button>
 
+      <NavLink to={`/productos/${producto.id}`}>
+        Ver detalle
+      </NavLink>
+
       <button onClick={() => onEliminar(producto.id)}>
         Eliminar
       </button>
@@ -101,4 +108,3 @@ function ProductoCard({
 }
 
 export default ProductoCard;
-

@@ -1,8 +1,20 @@
-function NuevoProducto() {
+// pages/NuevoProducto.jsx
+import { useNavigate } from "react-router";
+import FormularioProducto from "../components/FormularioProducto";
+
+function NuevoProducto({ agregarProducto }) {
+  const navigate = useNavigate();
+
+  const manejarAgregar = (nuevoProducto) => {
+    agregarProducto(nuevoProducto);
+    navigate("/inventario");
+  };
+
   return (
     <section>
       <h1>Nuevo producto</h1>
-      <p>Aquí podrás agregar un nuevo producto.</p>
+
+      <FormularioProducto onAgregar={manejarAgregar} />
     </section>
   );
 }
