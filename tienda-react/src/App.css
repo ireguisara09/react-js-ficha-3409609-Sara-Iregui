@@ -15,6 +15,20 @@
   padding: 10px 0 6px;
 }
 
+/* ===== Mensaje de estado ===== */
+
+.mensaje-estado {
+  text-align: center;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
 /* ===== Indicadores ===== */
 
 .indicadores {
@@ -227,7 +241,15 @@
   opacity: 0.85;
 }
 
-/* ===== Imagen ======*/
+.producto-card .stock-bajo {
+  color: #dc2626;
+  font-weight: 700;
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+/* ===== Imagen ===== */
+
 .producto-imagen {
   width: 200px;
   height: 200px;
@@ -238,6 +260,7 @@
 /* ===== Responsive ===== */
 
 @media (max-width: 600px) {
+
   .filtros {
     flex-direction: column;
     align-items: stretch;
@@ -246,58 +269,6 @@
   .filtros input[type="text"] {
     min-width: 0;
   }
-  /* ===== Agregar producto ===== */
-
-.agregar-producto {
-  background: var(--code-bg);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  margin-bottom: 30px;
-}
-
-.agregar-producto h2 {
-  text-align: center;
-  color: var(--text-h);
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.campos-formulario {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.campos-formulario input,
-.campos-formulario select {
-  padding: 12px 16px;
-  font-size: 15px;
-  min-width: 200px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
-  color: var(--text-h);
-  box-sizing: border-box;
-}
-
-.agregar-producto button {
-  padding: 12px 18px;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  background: var(--accent);
-  color: white;
-  cursor: pointer;
-}
-
-.agregar-producto button:hover {
-  opacity: 0.85;
-  transform: translateY(-2px);
-}
 
   .productos {
     grid-template-columns: 1fr;
@@ -306,4 +277,5 @@
   .campos-formulario {
     flex-direction: column;
   }
+
 }
