@@ -1,8 +1,22 @@
+import { Routes, Route } from "react-router";
+import Inicio from "./pages/Inicio";
+import Inventario from "./pages/Inventario";
+import NuevoProducto from "./pages/NuevoProducto";
+import Acerca from "./pages/Acerca";
+import NoEncontrado from "./pages/NoEncontrado";
 import { useState, useEffect } from "react";
 import ProductoCard from "./components/ProductoCard";
 import { productos as productosIniciales } from "./data/productos";
 import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
+
+<Routes>
+  <Route path="/" element={<Inicio />} />
+  <Route path="/inventario" element={<Inventario />} />
+  <Route path="/nuevo" element={<NuevoProducto />} />
+  <Route path="/acerca" element={<Acerca />} />
+  <Route path="*" element={<NoEncontrado />} />
+</Routes>
 
 function App() {
 
