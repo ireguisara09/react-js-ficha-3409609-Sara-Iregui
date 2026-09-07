@@ -1,8 +1,12 @@
-function NuevoProducto() {
+// pages/NuevoProducto.jsx
+import FormularioProducto from "../components/FormularioProducto";
+
+function NuevoProducto({ agregarProducto }) {
   return (
     <section>
       <h1>Nuevo producto</h1>
-      <p>Aquí podrás agregar un nuevo producto.</p>
+
+      <FormularioProducto onAgregar={agregarProducto} />
     </section>
   );
 }
