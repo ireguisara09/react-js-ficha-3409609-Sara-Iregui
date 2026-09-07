@@ -34,3 +34,32 @@ Y un tablero dinamico que hace y registra:
 Productos registrados
 Productos agotados
 Valor total del inventario
+
+
+Proyecto Tienda React
+
+Páginas:
+- Inicio
+- Inventario
+- Nuevo Producto
+- Detalle Producto
+- Acerca
+- 404
+
+Tecnologías:
+- React
+- React Router
+- Vite
+
+Funcionalidades:
+- Navegación entre páginas
+- Ruta dinámica /productos/:id
+- useParams()
+- useNavigate()
+- find()
+- Agregar productos
+- Editar productos
+- Eliminar productos
+- Control de stock
+- Persistencia con localStorage
+- Página 404
